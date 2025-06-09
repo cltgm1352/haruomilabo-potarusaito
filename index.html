@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HARUOMILABOポータルサイト</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #005555;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        header img.logo {
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        nav {
+            background-color: #007777;
+            padding: 1rem;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 1rem;
+        }
+        nav ul li a {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(45deg, #00a8a8, #00c4c4);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.2s, background 0.3s;
+        }
+        nav ul li a:hover {
+            background: linear-gradient(45deg, #00c4c4, #00e0e0);
+            transform: scale(1.05);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .link-section {
+            background-color: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .link-section h2 {
+            margin-top: 0;
+            color: #005555;
+        }
+        .link-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .link-section ul li {
+            margin: 0.5rem 0;
+        }
+        .link-section ul li a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(45deg, #007777, #009999);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.2s, background 0.3s;
+        }
+        .link-section ul li a:hover {
+            background: linear-gradient(45deg, #009999, #00bbbb);
+            transform: scale(1.05);
+        }
+        footer {
+            background-color: #005555;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            header img.logo {
+                max-width: 150px;
+            }
+            .link-section ul li a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://cdn.amebaowndme.com/madrid-prd/madrid-web/images/sites/2762588/f085b5538d050f8f18af8aee6c1e24e2_d61941ba88f8faba24a186e47505d243.png?width=1168" alt="ポータルサイト ロゴ" class="logo">
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#home">ホーム</a></li>
+            <li><a href="https://profu.link/u/haruomilabo" target="_blank">リンク集</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="link-section">
+            <h2>リンク集</h2>
+            <ul>
+                <li><a href="https://haruomilabo-home.amebaownd.com">公式ホームページ</a></li>
+              <span class="label">大好評！！
+              　<li><a href="https://haruomilabo-home.amebaownd.com">恐竜ゲーム</a></li>
+                <li><a href="https://kyouryuuge-mu-kaisetu.my.canva.site">恐竜ゲーム解説サイト</a></li>
+                <li><a href="https://haruomilabo3.amebaownd.com">HARUOMILABO実験室</a></li>
+                <li><a href="https://cltgm1352.github.io/Hoogle/">Hoogle</a></li><span class="label">新感覚検索エンジン！
+            </ul>
+        </div>
+        <div class="link-section">
+            <h2>関連情報</h2>
+            <ul>
+                <li><a href="https://example.com">関連サイト1</a></li>
+                <li><a href="https://example.com">関連サイト2</a></li>
+                <li><a href="https://example.com">関連サイト3</a></li>
+            </ul>
+        </div>
+    </div>
+    <footer>
+        <p>2025 HARUOMILABO,HARUOMILABOポータルサイト製作委員会</p>
+    </footer>
+</body>
+</html>
