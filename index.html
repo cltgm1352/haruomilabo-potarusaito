@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta name="google-site-verification" content="U1sIXwZTqGb45xN2EOftlFDi8dFOVGOOKNJqAnXOdUQ" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HARUOMILABOポータルサイト</title>
@@ -12,6 +11,8 @@
             padding: 0;
             background-color: #f4f4f4;
             color: #333;
+            position: relative;
+            overflow: auto;
         }
         header {
             background-color: #005555;
@@ -70,6 +71,17 @@
             margin-top: 0;
             color: #005555;
         }
+        .link-section h3 {
+            color: #333;
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+        }
+        .link-section p {
+            color: #333;
+            margin: 0.3rem 0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
         .link-section ul {
             list-style: none;
             padding: 0;
@@ -116,6 +128,22 @@
             bottom: 0;
             width: 100%;
         }
+        .matrix-bg {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 9999;
+        }
+        .matrix-bg.active {
+            display: block;
+        }
+        .content-hidden {
+            display: none;
+        }
         @media (max-width: 768px) {
             nav ul {
                 flex-direction: column;
@@ -138,10 +166,17 @@
                 top: -8px;
                 left: -8px;
             }
+            .link-section h3 {
+                font-size: 1.1rem;
+            }
+            .link-section p {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
+    <canvas id="matrixCanvas" class="matrix-bg"></canvas>
     <header>
         <img src="https://cdn.amebaowndme.com/madrid-prd/madrid-web/images/sites/2762588/f085b5538d050f8f18af8aee6c1e24e2_d61941ba88f8faba24a186e47505d243.png?width=1168" alt="ポータルサイト ロゴ" class="logo">
     </header>
@@ -159,19 +194,92 @@
                 <li><a href="https://sakyoku.my.canva.site/haruomilabo" target="_blank"><span class="label">大好評！！</span>恐竜ゲーム</a></li>
                 <li><a href="https://kyouryuuge-mu-kaisetu.my.canva.site" target="_blank">恐竜ゲーム解説サイト</a></li>
                 <li><a href="https://haruomilabo3.amebaownd.com" target="_blank">HARUOMILABO実験室</a></li>
-                <li><a href="https://cltgm1352.github.io/Hoogle/" target="_blank">Hoogle</a></li>
+                <li><a href="https://cltgm1352.github.io/Hoogle/" target="_blank">リンク</a></li>
             </ul>
         </div>
         <div class="link-section">
-            <h2>その他</h2>
+            <h2>関連情報</h2>
             <ul>
-              <h3>恐竜ゲーム</h3><p>大好評！！</p>
-<p>この恐竜ゲームGoogle似ていますが、※パクリではありません　意外とハマります！！</p>
+                <h3>恐竜ゲーム</h3>
+                <p>大好評！！</p>
+                <p>このリンクは、Google似ていますが、※パクリではありません 意外とハマります！！</p>
             </ul>
         </div>
     </div>
     <footer>
         <p>2025 HARUOMILABO And HARUOMILABOポータルサイト製作委員会</p>
     </footer>
+    <script>
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        let matrixActive = false;
+        let pPressed = false;
+        let lPressed = false;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0F0';
+            ctx.font = `${fontSize}px monospace`;
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        let animationId = null;
+
+        function toggleMatrix() {
+            matrixActive = !matrixActive;
+            const matrixCanvas = document.getElementById('matrixCanvas');
+            const contentElements = document.querySelectorAll('header, nav, .container, footer');
+
+            if (matrixActive) {
+                matrixCanvas.classList.add('active');
+                contentElements.forEach(el => el.classList.add('content-hidden'));
+                animationId = setInterval(drawMatrix, 33);
+            } else {
+                matrixCanvas.classList.remove('active');
+                contentElements.forEach(el => el.classList.remove('content-hidden'));
+                clearInterval(animationId);
+                animationId = null;
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'p' || e.key === 'P') pPressed = true;
+            if (e.key === 'l' || e.key === 'L') lPressed = true;
+            if (pPressed && lPressed) {
+                toggleMatrix();
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'p' || e.key === 'P') pPressed = false;
+            if (e.key === 'l' || e.key === 'L') lPressed = false;
+        });
+    </script>
 </body>
 </html>
